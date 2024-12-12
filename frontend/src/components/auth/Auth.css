@@ -1,0 +1,243 @@
+:root {
+  --primary-color: #8B7355;  /* 主题棕色 */
+  --light-brown: #D2B48C;    /* 浅棕色 */
+  --dark-brown: #654321;     /* 深棕色 */
+  --cream: #FAEBD7;         /* 奶油色 */
+  --white: #FFFFFF;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景熊掌图案 */
+.auth-container::before {
+  content: '🐾';
+  position: fixed;
+  font-size: 100px;
+  opacity: 0.05;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.auth-box {
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(139, 115, 85, 0.1);
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 1;
+}
+
+.auth-box::before {
+  content: '🐻';
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+}
+
+.auth-box h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--dark-brown);
+  font-size: 1.8rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+  position: relative;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.5rem;
+  border: 2px solid var(--light-brown);
+  border-radius: 20px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+}
+
+/* 输入框图标 */
+.form-group::before {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+}
+
+.form-group.email::before {
+  content: '📧';
+}
+
+.form-group.password::before {
+  content: '🔒';
+}
+
+.form-group.nickname::before {
+  content: '🏷️';
+}
+
+.verification-code {
+  display: flex;
+  gap: 1rem;
+}
+
+.verification-code input {
+  flex: 1;
+  padding-left: 2.5rem;
+}
+
+.verification-code::before {
+  content: '🔑';
+}
+
+.send-code-button {
+  padding: 0.8rem 1.2rem;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.send-code-button:hover {
+  background-color: var(--dark-brown);
+}
+
+.send-code-button:disabled {
+  background-color: var(--light-brown);
+  cursor: not-allowed;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-button:hover {
+  background-color: var(--dark-brown);
+}
+
+.auth-button::after {
+  content: '🐾';
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.auth-button:hover::after {
+  opacity: 1;
+}
+
+.auth-links {
+  margin-top: 1.5rem;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.auth-links span {
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.auth-links span:hover {
+  color: var(--dark-brown);
+}
+
+.auth-links span::after {
+  content: '🐾';
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.auth-links span:hover::after {
+  opacity: 1;
+  right: -25px;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 1rem;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.error-message::before {
+  content: '🐻';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 添加熊掌点击效果 */
+.paw-print {
+  position: fixed;
+  pointer-events: none;
+  font-size: 20px;
+  animation: pawPrint 1s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes pawPrint {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.5) rotate(360deg);
+    opacity: 0;
+  }
+}

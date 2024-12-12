@@ -1,0 +1,137 @@
+{
+  "info": {
+    "name": "AI-Chat-Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/auth/register",
+            "body": {
+              "mode": "raw",
+              "raw": {
+                "email": "test@example.com",
+                "password": "Password123",
+                "nickname": "测试用户",
+                "code": "123456"
+              },
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/auth/login",
+            "body": {
+              "mode": "raw",
+              "raw": {
+                "email": "test@example.com",
+                "password": "Password123"
+              },
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Send Verification Code",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/auth/send-code",
+            "body": {
+              "mode": "raw",
+              "raw": {
+                "email": "test@example.com"
+              },
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chat",
+      "item": [
+        {
+          "name": "Send Message",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/chat/send",
+            "headers": {
+              "Authorization": "Bearer {{token}}"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": {
+                "message": "你好，请介绍一下你自己"
+              },
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Upload File",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/api/chat/file",
+            "headers": {
+              "Authorization": "Bearer {{token}}"
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/path/to/your/file"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Chat History",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/api/chat/history",
+            "headers": {
+              "Authorization": "Bearer {{token}}"
+            },
+            "query": [
+              {
+                "key": "page",
+                "value": "1"
+              },
+              {
+                "key": "pageSize",
+                "value": "20"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+} 

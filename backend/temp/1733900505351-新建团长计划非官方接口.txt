@@ -1,0 +1,263 @@
+短视频+CPS｜按核销量结算
+
+{
+	"account_id": "7195080618764404736",
+	"name": "20241209 库迪咖啡（北京）有限公司",
+	"merchant_confirm_date": "2024-12-31",
+	"item_publish_start_date": "2025-01-01",
+	"item_publish_end_date": "2025-01-31",
+	"product_list": [{
+			"product_id": "1817656209505307",
+			"product_commission_rate": 0.01
+		},
+		{
+			"product_id": "1817656139510832",
+			"product_commission_rate": 0.01
+		}
+	],
+	"keyuser_list": [{
+		"keyuser_id": "1733307394952654",
+		"keyuser_commission_rate": 0.01,
+		"add_source": 1
+	}],
+	"commission_expire_days": 30,
+	"content_type": 1,
+	"commission_type": 1,
+	"keyuser_contact_mobile": "18672495746",
+	"broker_coop_alliance_role_enum": 2,
+	"trusteeship_product_task": false,
+	"can_apply": true,
+	"task_type": 30,
+	"keyuser_contact_wechat": "18672495746",
+	"keyuser_commission_rate": 0.02,
+	"recruit_require": {
+		"media_requirement": {
+			"need_audit": true,
+			"description": "达人发布内容要求"
+		}
+	},
+	"sync_task_square": false,
+	"self_binding_talent_commission": true,
+	"benefit": {
+		"cooperation_note": "招募信息"
+	},
+	"add_talent_version": 0
+}
+
+
+短视频+CPS保底费
+{
+	"account_id": "7195080618764404736",
+	"name": "20241209 库迪咖啡（北京）有限公司",
+	"merchant_confirm_date": "2024-12-31",
+	"item_publish_start_date": "2025-01-01",
+	"item_publish_end_date": "2025-01-31",
+	"product_list": [{
+			"product_id": "1817656209505307",
+			"product_commission_rate": 0.01
+		},
+		{
+			"product_id": "1817656139510832",
+			"product_commission_rate": 0.01
+		}
+	],
+	"keyuser_list": [{
+		"keyuser_id": "1733307394952654",
+		"keyuser_commission_rate": 0.5,
+		"base_fee_amount": "200",
+		"add_source": 1
+	}],
+	"commission_expire_days": 30,
+	"content_type": 1,
+	"commission_type": 3,
+	"keyuser_contact_mobile": "18672495740",
+	"broker_coop_alliance_role_enum": 2,
+	"trusteeship_product_task": false,
+	"can_apply": true,
+	"task_type": 30,
+	"keyuser_contact_wechat": "18672495741",
+	"keyuser_commission_rate": 0.2,
+	"recruit_require": {
+		"media_requirement": {
+			"need_audit": true,
+			"description": "达人发布内容要求"
+		}
+	},
+	"sync_task_square": false,
+	"self_binding_talent_commission": true,
+	"benefit": {
+		"cooperation_note": "招募信息"
+	},
+	"task_base_fee_info": [{
+			"requirement_type": 1,
+			"trade_level": 0,
+			"amount": "100"
+		},
+		{
+			"requirement_type": 1,
+			"trade_level": 1,
+			"amount": "200"
+		},
+		{
+			"requirement_type": 1,
+			"trade_level": 2,
+			"amount": "300"
+		},
+		{
+			"requirement_type": 1,
+			"trade_level": 3,
+			"amount": "400"
+		},
+		{
+			"requirement_type": 1,
+			"trade_level": 4,
+			"amount": "500"
+		},
+		{
+			"requirement_type": 1,
+			"trade_level": 5,
+			"amount": "600"
+		},
+		{
+			"requirement_type": 1,
+			"trade_level": 6,
+			"amount": "700"
+		},
+		{
+			"requirement_type": 1,
+			"trade_level": 7,
+			"amount": "800"
+		},
+		{
+			"requirement_type": 1,
+			"trade_level": 8,
+			"amount": "900"
+		}
+	],
+	"add_talent_version": 1
+}
+
+
+
+直播+CPS｜按核销量
+{
+    "account_id": "7195080618764404736",
+    "name": "20241209 库迪咖啡（北京）有限公司",
+    "merchant_confirm_date": "2024-12-31",
+    "product_list": [
+        {
+            "product_id": "1817656209505307",
+            "product_commission_rate": 0.05
+        },
+        {
+            "product_id": "1817656139510832",
+            "product_commission_rate": 0.05
+        }
+    ],
+    "keyuser_list": [
+        {
+            "keyuser_id": "1733307394952654",
+            "keyuser_commission_rate": 0.03,
+            "add_source": 1
+        }
+    ],
+    "commission_expire_days": 30,
+    "content_type": 2,
+    "commission_type": 1,
+    "keyuser_contact_mobile": "18672495746",
+    "broker_coop_alliance_role_enum": 3,
+    "trusteeship_product_task": false,
+    "can_apply": true,
+    "partner_id": "7122664782997489701",
+    "task_type": 30,
+    "keyuser_contact_wechat": "18672495746",
+    "keyuser_commission_rate": 0.09,
+    "recruit_require": {},
+    "sync_task_square": false,
+    "self_binding_talent_commission": true,
+    "benefit": {
+        "cooperation_note": "招募信息"
+    },
+    "add_talent_version": 1
+}
+
+
+直播+CPS保底费
+{
+	"account_id": "7195080618764404736",
+	"name": "20241209 库迪咖啡（北京）有限公司",
+	"merchant_confirm_date": "2024-12-31",
+	"product_list": [{
+		"product_id": "1817656209505307",
+		"product_commission_rate": 0.58
+	}, {
+		"product_id": "1817656139510832",
+		"product_commission_rate": 0.58
+	}],
+	"keyuser_list": [{
+		"keyuser_id": "1733307394952654",
+		"keyuser_commission_rate": 0.1,
+		"base_fee_amount": "200",
+		"add_source": 1
+	}],
+	"commission_expire_days": 30,
+	"content_type": 2,
+	"commission_type": 3,
+	"keyuser_contact_mobile": "18672495746",
+	"broker_coop_alliance_role_enum": 3,
+	"trusteeship_product_task": false,
+	"can_apply": true,
+	"partner_id": "7122664782997489701",
+	"task_type": 30,
+	"keyuser_contact_wechat": "18672495746",
+	"keyuser_commission_rate": 0.99,
+	"recruit_require": {
+		"media_requirement": {
+			"need_audit": true,
+			"description": "达人发布内容要求12312312"
+		}
+	},
+	"sync_task_square": true,
+	"self_binding_talent_commission": true,
+	"benefit": {
+		"cooperation_note": "招募信息12312312"
+	},
+	"task_base_fee_info": [{
+		"requirement_type": 1,
+		"trade_level": 0,
+		"amount": "100"
+	}, {
+		"requirement_type": 1,
+		"trade_level": 1,
+		"amount": "200"
+	}, {
+		"requirement_type": 1,
+		"trade_level": 2,
+		"amount": "300"
+	}, {
+		"requirement_type": 1,
+		"trade_level": 3,
+		"amount": "400"
+	}, {
+		"requirement_type": 1,
+		"trade_level": 4,
+		"amount": "500"
+	}, {
+		"requirement_type": 1,
+		"trade_level": 5,
+		"amount": "600"
+	}, {
+		"requirement_type": 1,
+		"trade_level": 6,
+		"amount": "700"
+	}, {
+		"requirement_type": 1,
+		"trade_level": 7,
+		"amount": "800"
+	}, {
+		"requirement_type": 1,
+		"trade_level": 8,
+		"amount": "900"
+	}],
+	"add_talent_version": 0
+}

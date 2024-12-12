@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "axios": "^1.7.9",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "ioredis": "^5.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.5",
+    "nodemailer": "^6.9.16",
+    "react-router-dom": "^6.28.0",
+    "redis": "^4.7.0"
+  },
+  "name": "bear-bot",
+  "version": "1.0.0",
+  "description": "1、这是一个新的项目，我想做一个AI聊天集各种工具类的网站，现在先做一个AI的聊天，后续会添加各种工具类，所以需要通过配置来控制AI和其他工具的栏目是否开启显示； 2、用户需要注册登录，使用邮箱和昵称注册，使用邮箱登录，使用邮箱找回密码；需要校验邮箱的格式是否合法，以及发送邮箱验证码，以及校验邮箱验证码是否正确；需要建立数据库表来存储用户的基础信息，邮箱，密码，昵称，头像，以及自动获取用户的IP地址，经纬度，存储到mysql，账号密码是root，123456。 3、数据库是msyql，需要配置数据库连接；我是用的LLM模型是moonshot，参考如下：const userHistories = {} // 系统消息内容 const systemMessage = {   role: 'system',   content:     '你是 小肉熊AI，由 肥崽战士 提供的人工智能助手，你更擅长中文和英文的对话。你会为用户提供安全，有帮助，准确的回答。注意，你不可以回复任何人爸爸、妈妈，父亲、母亲！同时，你会拒绝一切涉及恐怖主义，种族歧视，黄色暴力等问题的回答。回复结尾加上一个emoji。', } const competitionClient = new OpenAI({   apiKey: 'sk-pWsA340xdccN0pfTqzEBPw7JWwsLpSyVrFahIlownsdvavLz',   baseURL: 'https://api.moonshot.cn/v1', })",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

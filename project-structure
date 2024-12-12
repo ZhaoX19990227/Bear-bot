@@ -1,0 +1,26 @@
+project-root/
+├── backend/
+│   ├── config/
+│   │   ├── database.js
+│   │   └── ai.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── chatController.js
+│   │   └── fileController.js
+│   ├── models/
+│   │   └── user.js
+│   ├── routes/
+│   │   ├── auth.js
+│   │   ├── chat.js
+│   │   └── file.js
+│   └── utils/
+│       ├── email.js
+│       └── validation.js
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── themes/
+│   │   └── utils/
+│   ├── public/
+│   └── index.html
+└── README.md 

@@ -1,0 +1,142 @@
+.user-info {
+  position: relative;
+}
+
+.user-avatar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.user-avatar:hover {
+  background-color: rgba(139, 115, 85, 0.1);
+}
+
+.user-avatar img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--white);
+}
+
+.user-nickname {
+  color: var(--white);
+  font-size: 0.9rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0;
+  min-width: 120px;
+  z-index: 1000;
+}
+
+.dropdown-menu div {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  color: var(--dark-brown);
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu div:hover {
+  background-color: var(--cream);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal h3 {
+  color: var(--dark-brown);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.preview-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 1rem auto;
+  border: 2px solid var(--light-brown);
+}
+
+.modal .form-group {
+  margin-bottom: 1rem;
+}
+
+.modal label {
+  display: block;
+  color: var(--dark-brown);
+  margin-bottom: 0.5rem;
+}
+
+.modal input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid var(--light-brown);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.modal input:disabled {
+  background-color: var(--cream);
+  cursor: not-allowed;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-buttons button[type="submit"] {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.modal-buttons button[type="button"] {
+  background-color: var(--cream);
+  color: var(--dark-brown);
+}
+
+.modal-buttons button:hover {
+  opacity: 0.9;
+}
