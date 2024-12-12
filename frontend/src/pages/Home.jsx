@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AIButton from "../components/ai/AIButton";
 import PawPrints from "../components/common/PawPrints";
+import UserInfo from '../components/chat/UserInfo';
 import "./Home.css";
 
 const Home = () => {
@@ -84,46 +85,7 @@ const Home = () => {
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h3>个人信息</h3>
-            <form onSubmit={handleUpdateProfile}>
-              <div className="avatar-upload">
-                <img
-                  src={avatarPreview}
-                  alt="avatar"
-                  className="preview-avatar"
-                />
-                <label htmlFor="avatar-input" className="upload-label">
-                  更换头像
-                </label>
-                <input
-                  id="avatar-input"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleAvatarChange}
-                  style={{ display: "none" }}
-                />
-              </div>
-              <div className="form-group">
-                <label>昵称</label>
-                <input
-                  type="text"
-                  value={userInfo.nickname}
-                  onChange={(e) =>
-                    setUserInfo({ ...userInfo, nickname: e.target.value })
-                  }
-                />
-              </div>
-              <div className="form-group">
-                <label>邮箱</label>
-                <input type="email" value={userInfo.email} disabled />
-              </div>
-              <div className="modal-buttons">
-                <button type="submit">保存</button>
-                <button type="button" onClick={() => setShowModal(false)}>
-                  取消
-                </button>
-              </div>
-            </form>
+            <UserInfo user={userInfo} />
           </div>
         </div>
       )}

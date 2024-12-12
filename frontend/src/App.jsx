@@ -18,10 +18,7 @@ const App = () => {
           path="/chat" 
           element={isAuthenticated ? <Chat /> : <Navigate to="/login" />} 
         />
-        <Route 
-          path="/" 
-          element={isAuthenticated ? <Home /> : <Navigate to="/login" />} 
-        />
+        <Route path="/" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );

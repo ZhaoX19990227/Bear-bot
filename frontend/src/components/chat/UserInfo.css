@@ -114,29 +114,77 @@
 
 .modal-buttons {
   display: flex;
+  justify-content: center;
   gap: 1rem;
   margin-top: 1.5rem;
 }
 
 .modal-buttons button {
-  flex: 1;
-  padding: 0.8rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--bear-brown);
+  color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.modal-buttons button[type="submit"] {
-  background-color: var(--primary-color);
-  color: var(--white);
-}
-
-.modal-buttons button[type="button"] {
-  background-color: var(--cream);
-  color: var(--dark-brown);
-}
-
 .modal-buttons button:hover {
-  opacity: 0.9;
+  background-color: rgba(150, 114, 89, 0.8);
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.tabs button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  border-bottom: 2px solid var(--bear-brown);
+  font-weight: bold;
+}
+
+.tab-content {
+  padding: 1rem;
+  border: 1px solid var(--bear-brown);
+  border-radius: 8px;
+}
+
+.logout-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--bear-brown);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+.logout-button:hover {
+  background-color: rgba(150, 114, 89, 0.8);
+}
+
+.save-button {
+  padding: 0.5rem 1rem;
+  background-color: var(--bear-brown);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto;
+}
+
+.save-button:hover {
+  background-color: rgba(150, 114, 89, 0.8);
 }

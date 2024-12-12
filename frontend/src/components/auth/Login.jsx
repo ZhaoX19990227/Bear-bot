@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Auth.css';
 
@@ -8,7 +8,7 @@ const Login = () => {
     email: '',
     password: ''
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
   const [pawPrints, setPawPrints] = useState([]);
 
   const handleChange = (e) => {
@@ -33,6 +33,7 @@ const Login = () => {
       if (data.success) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
+        console.log("Navigating to home page");
         navigate('/');
       } else {
         setError(data.message);

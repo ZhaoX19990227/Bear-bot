@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './UserInfo.css';
 
-const UserInfo = ({ user, onLogout }) => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+const UserInfo = ({ user }) => {
+  const [activeTab, setActiveTab] = useState('info'); // 默认选中个人信息
   const [userInfo, setUserInfo] = useState(user);
   const [avatarPreview, setAvatarPreview] = useState(user.avatar);
+  const [showConfirmLogout, setShowConfirmLogout] = useState(false); // 控制退出登录确认弹窗
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -40,61 +40,87 @@ const UserInfo = ({ user, onLogout }) => {
       if (data.success) {
         localStorage.setItem('user', JSON.stringify(data.user));
         setUserInfo(data.user);
-        setShowModal(false);
       }
     } catch (error) {
       console.error('更新个人信息失败:', error);
     }
   };
 
+  const handleLogout = () => {
+    setShowConfirmLogout(true); // 显示确认弹窗
+  };
+
+  const confirmLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    // 这里可以添加跳转到登录页面的逻辑
+    window.location.href = '/login'; // 直接跳转到登录页面
+  };
+
   return (
-    <div className="user-info">
-      <div className="user-avatar" onClick={() => setShowDropdown(!showDropdown)}>
-        <img src={user.avatar} alt={user.nickname} />
-        <span className="user-nickname">{user.nickname}</span>
+    <div className="user-info-modal">
+      <div className="tabs">
+        <button onClick={() => setActiveTab('info')} className={activeTab === 'info' ? 'active' : ''}>个人信息🐻</button>
+        <button onClick={() => setActiveTab('support')} className={activeTab === 'support' ? 'active' : ''}>联系/支持作者🐼</button>
+        <button onClick={() => setActiveTab('settings')} className={activeTab === 'settings' ? 'active' : ''}>设置🐻‍❄️</button>
       </div>
 
-      {showDropdown && (
-        <div className="dropdown-menu">
-          <div onClick={() => setShowModal(true)}>个人信息</div>
-          <div onClick={onLogout}>退出登录</div>
+      {activeTab === 'info' && (
+        <div className="tab-content">
+          <h3>个人信息</h3>
+          <div className="avatar-upload">
+            <img src={avatarPreview} alt="avatar" className="preview-avatar" />
+            <label htmlFor="avatar-input" className="upload-label">更换头像</label>
+            <input
+              id="avatar-input"
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarChange}
+              style={{ display: 'none' }}
+            />
+          </div>
+          <div className="form-group">
+            <label>昵称</label>
+            <input
+              type="text"
+              value={userInfo.nickname}
+              onChange={(e) => setUserInfo({ ...userInfo, nickname: e.target.value })}
+            />
+          </div>
+          <div className="form-group">
+            <label>邮箱</label>
+            <input type="email" value={userInfo.email} disabled />
+          </div>
+          <button className="save-button" onClick={handleUpdateProfile}>保存</button>
         </div>
       )}
 
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h3>个人信息</h3>
-            <form onSubmit={handleUpdateProfile}>
-              <div className="avatar-upload">
-                <img 
-                  src={avatarPreview} 
-                  alt="avatar" 
-                  className="preview-avatar"
-                />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleAvatarChange}
-                />
-              </div>
-              <div className="form-group">
-                <label>昵称</label>
-                <input
-                  type="text"
-                  value={userInfo.nickname}
-                  onChange={(e) => setUserInfo({...userInfo, nickname: e.target.value})}
-                />
-              </div>
-              <div className="form-group">
-                <label>邮箱</label>
-                <input type="email" value={userInfo.email} disabled />
-              </div>
-              <div className="modal-buttons">
-                <button type="submit">保存</button>
-                <button type="button" onClick={() => setShowModal(false)}>取消</button>
-              </div>
-            </form>
+      {activeTab === 'support' && (
+        <div className="tab-content">
+          <h3>联系/支持作者</h3>
+          <p>如需支持，请联系作者：</p>
+          <img src="/images/friend.jpg" alt="Friend" style={{ width: '100px', margin: '10px' }} />
+          <img src="/images/pay.jpg" alt="Pay" style={{ width: '100px', margin: '10px' }} />
+        </div>
+      )}
+
+      {activeTab === 'settings' && (
+        <div className="tab-content">
+          <h3>设置</h3>
+          <button className="logout-button" onClick={handleLogout}>退出登录</button>
+        </div>
+      )}
+
+      {/* 退出登录确认弹窗 */}
+      {showConfirmLogout && (
+        <div className="modal-overlay" onClick={() => setShowConfirmLogout(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h3>确认退出</h3>
+            <p>确定要退出登录吗？</p>
+            <div className="modal-buttons">
+              <button onClick={confirmLogout}>确定</button>
+              <button onClick={() => setShowConfirmLogout(false)}>取消</button>
+            </div>
           </div>
         </div>
       )}
@@ -102,4 +128,4 @@ const UserInfo = ({ user, onLogout }) => {
   );
 };
 
-export default UserInfo; 
+export default UserInfo;
