@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AIButton from '../components/ai/AIButton';
-import PawPrints from '../components/common/PawPrints';
-import './Home.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import AIButton from "../components/ai/AIButton";
+import PawPrints from "../components/common/PawPrints";
+import "./Home.css";
 
 const Home = () => {
   const navigate = useNavigate();
-  const [showDropdown, setShowDropdown] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('user')));
+  const [userInfo, setUserInfo] = useState(
+    JSON.parse(localStorage.getItem("user"))
+  );
   const [avatarPreview, setAvatarPreview] = useState(userInfo.avatar);
 
   const handleLogout = () => {
@@ -17,16 +18,16 @@ const Home = () => {
   };
 
   const confirmLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/login');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
   };
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
-        alert('头像文件不能超过5MB');
+        alert("头像文件不能超过5MB");
         return;
       }
       setAvatarPreview(URL.createObjectURL(file));
@@ -38,27 +39,27 @@ const Home = () => {
     e.preventDefault();
     try {
       const formData = new FormData();
-      formData.append('nickname', userInfo.nickname);
+      formData.append("nickname", userInfo.nickname);
       if (userInfo.newAvatar) {
-        formData.append('avatar', userInfo.newAvatar);
+        formData.append("avatar", userInfo.newAvatar);
       }
 
-      const response = await fetch('/api/auth/update-profile', {
-        method: 'PUT',
+      const response = await fetch("/api/auth/update-profile", {
+        method: "PUT",
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        body: formData
+        body: formData,
       });
 
       const data = await response.json();
       if (data.success) {
-        localStorage.setItem('user', JSON.stringify(data.user));
+        localStorage.setItem("user", JSON.stringify(data.user));
         setUserInfo(data.user);
         setShowModal(false);
       }
     } catch (error) {
-      console.error('更新个人信息失败:', error);
+      console.error("更新个人信息失败:", error);
     }
   };
 
@@ -67,17 +68,11 @@ const Home = () => {
       <div className="header">
         <div className="user-info">
           <span className="user-nickname">{userInfo.nickname}</span>
-          <div className="avatar-container" onClick={() => setShowDropdown(!showDropdown)}>
+          <div
+            className="avatar-container"
+            onClick={() => setShowModal(true)}
+          >
             <img src={userInfo.avatar} alt="avatar" className="user-avatar" />
-            {showDropdown && (
-              <div className="dropdown-menu">
-                <div onClick={() => {
-                  setShowModal(true);
-                  setShowDropdown(false);
-                }}>个人信息</div>
-                <div onClick={handleLogout}>退出登录</div>
-              </div>
-            )}
           </div>
         </div>
       </div>
@@ -88,11 +83,15 @@ const Home = () => {
       {/* 个人信息弹窗 */}
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal" onClick={e => e.stopPropagation()}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
             <h3>个人信息</h3>
             <form onSubmit={handleUpdateProfile}>
               <div className="avatar-upload">
-                <img src={avatarPreview} alt="avatar" className="preview-avatar" />
+                <img
+                  src={avatarPreview}
+                  alt="avatar"
+                  className="preview-avatar"
+                />
                 <label htmlFor="avatar-input" className="upload-label">
                   更换头像
                 </label>
@@ -101,7 +100,7 @@ const Home = () => {
                   type="file"
                   accept="image/*"
                   onChange={handleAvatarChange}
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                 />
               </div>
               <div className="form-group">
@@ -109,7 +108,9 @@ const Home = () => {
                 <input
                   type="text"
                   value={userInfo.nickname}
-                  onChange={(e) => setUserInfo({...userInfo, nickname: e.target.value})}
+                  onChange={(e) =>
+                    setUserInfo({ ...userInfo, nickname: e.target.value })
+                  }
                 />
               </div>
               <div className="form-group">
@@ -118,7 +119,9 @@ const Home = () => {
               </div>
               <div className="modal-buttons">
                 <button type="submit">保存</button>
-                <button type="button" onClick={() => setShowModal(false)}>取消</button>
+                <button type="button" onClick={() => setShowModal(false)}>
+                  取消
+                </button>
               </div>
             </form>
           </div>
