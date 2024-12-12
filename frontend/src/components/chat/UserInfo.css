@@ -188,3 +188,14 @@
 .save-button:hover {
   background-color: rgba(150, 114, 89, 0.8);
 }
+
+.support-images {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.support-item {
+  text-align: center;
+}

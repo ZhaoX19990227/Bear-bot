@@ -53,7 +53,6 @@ const UserInfo = ({ user }) => {
   const confirmLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    // 这里可以添加跳转到登录页面的逻辑
     window.location.href = '/login'; // 直接跳转到登录页面
   };
 
@@ -98,9 +97,16 @@ const UserInfo = ({ user }) => {
       {activeTab === 'support' && (
         <div className="tab-content">
           <h3>联系/支持作者</h3>
-          <p>如需支持，请联系作者：</p>
-          <img src="/images/friend.jpg" alt="Friend" style={{ width: '100px', margin: '10px' }} />
-          <img src="/images/pay.jpg" alt="Pay" style={{ width: '100px', margin: '10px' }} />
+          <div className="support-images">
+            <div className="support-item">
+              <img src="/images/friend.jpg" alt="Friend" style={{ width: '100px', margin: '10px' }} />
+              <p>加我好友</p>
+            </div>
+            <div className="support-item">
+              <img src="/images/pay.jpg" alt="Pay" style={{ width: '100px', margin: '10px' }} />
+              <p>请我喝咖啡</p>
+            </div>
+          </div>
         </div>
       )}
 
