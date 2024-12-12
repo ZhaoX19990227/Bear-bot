@@ -234,8 +234,12 @@ const Chat = () => {
   return (
     <div className="chat-container" onClick={handleClick}>
       <div className="chat-header">
-        <h2>🐻 小肉熊AI助手</h2>
-        <UserInfo user={user} onLogout={logout} />
+        <h2>小肉熊AI助手</h2>
+        <img 
+            src={user.avatar} 
+            alt={user.nickname} 
+            className="user-avatar"
+         />
       </div>
       <div className="messages-container">
         {messages.map((message, index) => (

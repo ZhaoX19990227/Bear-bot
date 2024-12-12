@@ -1,36 +1,30 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Chat from './components/chat/Chat';
-import { ThemeProvider } from './contexts/ThemeContext';
+import Home from './pages/Home';
+import PawPrints from './components/common/PawPrints';
 
 const App = () => {
-  return (
-    <ThemeProvider>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route 
-            path="/chat" 
-            element={
-              <PrivateRoute>
-                <Chat />
-              </PrivateRoute>
-            } 
-          />
-          <Route path="/" element={<Navigate to="/login" />} />
-        </Routes>
-      </Router>
-    </ThemeProvider>
-  );
-};
+  const isAuthenticated = !!localStorage.getItem('token');
 
-// 私有路由组件
-const PrivateRoute = ({ children }) => {
-  const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/login" />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route 
+          path="/chat" 
+          element={isAuthenticated ? <Chat /> : <Navigate to="/login" />} 
+        />
+        <Route 
+          path="/" 
+          element={isAuthenticated ? <Home /> : <Navigate to="/login" />} 
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default App;

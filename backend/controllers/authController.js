@@ -11,6 +11,19 @@ export const sendVerificationCode = async (req, res) => {
   try {
     const { email } = req.body;
     
+    // 检查邮箱是否已注册
+    const [existingUser] = await pool.query(
+      'SELECT id FROM users WHERE email = ?', 
+      [email]
+    );
+    
+    if (existingUser.length > 0) {
+      return res.status(400).json({ 
+        success: false, 
+        message: '该邮箱已被注册' 
+      });
+    }
+    
     // 发送验证码
     await emailUtils.sendVerificationCode(email);
     
@@ -83,10 +96,12 @@ export const register = async (req, res) => {
     const latitude = req.body.latitude || null;
     const longitude = req.body.longitude || null;
 
+    const avatarUrl = `${process.env.UPLOAD_URL}/avatars/${req.file.filename}`;
+
     // 插入用户数据
     await pool.query(
-      'INSERT INTO users (email, password, nickname, ip_address, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)',
-      [email, hashedPassword, nickname, ip, latitude, longitude]
+      'INSERT INTO users (email, password, nickname, ip_address, latitude, longitude, avatar) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [email, hashedPassword, nickname, ip, latitude, longitude, avatarUrl]
     );
 
     res.json({ success: true, message: '注册成功' });
@@ -189,6 +204,6 @@ export const getUserInfo = async (req, res) => {
     });
   } catch (error) {
     console.error('获取用户信息失败:', error);
-    res.status(500).json({ success: false, message: '获���用户信息失败' });
+    res.status(500).json({ success: false, message: '获取用户信息失败' });
   }
 }; 

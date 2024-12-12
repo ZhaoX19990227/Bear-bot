@@ -87,7 +87,7 @@
 
 .message.user {
   align-self: flex-end;
-  padding-right: 60px;
+  padding-right: 75px;
 }
 
 .message.user .avatar {
@@ -105,12 +105,12 @@
   word-wrap: break-word;
   white-space: pre-wrap;
   min-width: 200px;
-  max-width: calc(100% - 60px);
+  max-width: calc(100% - 75px);
 }
 
 .message.ai {
   align-self: flex-start;
-  padding-left: 60px;
+  padding-left: 75px;
 }
 
 .message.ai .avatar {
@@ -129,14 +129,14 @@
   word-wrap: break-word;
   white-space: pre-wrap;
   min-width: 200px;
-  max-width: calc(100% - 60px);
+  max-width: calc(100% - 75px);
 }
 
 .avatar {
-  width: 45px;
-  height: 45px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  border: 2px solid var(--light-brown);
+  border: 3px solid var(--light-brown);
   object-fit: cover;
   box-shadow: 0 2px 4px rgba(139, 115, 85, 0.1);
 }
@@ -409,7 +409,7 @@
   word-wrap: break-word;
   white-space: pre-wrap;
   min-width: 150px;
-  max-width: calc(100% - 60px);
+  max-width: calc(100% - 75px);
 }
 
 /* 用户消息样式 */
@@ -498,4 +498,43 @@
   margin-bottom: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+}
+
+/* 修改聊天界面头像大小 */
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid var(--light-brown);
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(139, 115, 85, 0.1);
+}
+
+/* 调整消息内容的边距，以适应更大的头像 */
+.message.user {
+  padding-right: 75px;
+}
+
+.message.ai {
+  padding-left: 75px;
+}
+
+/* 调整消息内容的最大宽度 */
+.message-content {
+  max-width: calc(100% - 75px);
+}
+
+/* 调整头像在右上角的位置 */
+.chat-header .user-avatar {
+  width: 50px;
+  height: 50px;
+  border: 3px solid var(--white);
+  border-radius: 50%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.chat-header .user-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }

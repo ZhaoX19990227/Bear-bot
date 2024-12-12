@@ -1,11 +1,26 @@
 import React, { useState } from 'react';
-import './UserInfo.css';
+import { useNavigate } from 'react-router-dom';
+import AIButton from '../components/ai/AIButton';
+import PawPrints from '../components/common/PawPrints';
+import './Home.css';
 
-const UserInfo = ({ user, onLogout }) => {
+const Home = () => {
+  const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [userInfo, setUserInfo] = useState(user);
-  const [avatarPreview, setAvatarPreview] = useState(user.avatar);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('user')));
+  const [avatarPreview, setAvatarPreview] = useState(userInfo.avatar);
+
+  const handleLogout = () => {
+    setShowConfirm(true);
+  };
+
+  const confirmLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/login');
+  };
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -48,34 +63,45 @@ const UserInfo = ({ user, onLogout }) => {
   };
 
   return (
-    <div className="user-info">
-      <div className="user-avatar" onClick={() => setShowDropdown(!showDropdown)}>
-        <img src={user.avatar} alt={user.nickname} />
-        <span className="user-nickname">{user.nickname}</span>
-      </div>
-
-      {showDropdown && (
-        <div className="dropdown-menu">
-          <div onClick={() => setShowModal(true)}>个人信息</div>
-          <div onClick={onLogout}>退出登录</div>
+    <div className="home-container">
+      <div className="header">
+        <div className="user-info">
+          <span className="user-nickname">{userInfo.nickname}</span>
+          <div className="avatar-container" onClick={() => setShowDropdown(!showDropdown)}>
+            <img src={userInfo.avatar} alt="avatar" className="user-avatar" />
+            {showDropdown && (
+              <div className="dropdown-menu">
+                <div onClick={() => {
+                  setShowModal(true);
+                  setShowDropdown(false);
+                }}>个人信息</div>
+                <div onClick={handleLogout}>退出登录</div>
+              </div>
+            )}
+          </div>
         </div>
-      )}
+      </div>
+      <h1>Hello World</h1>
+      <AIButton />
+      <PawPrints />
 
+      {/* 个人信息弹窗 */}
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal">
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
             <h3>个人信息</h3>
             <form onSubmit={handleUpdateProfile}>
               <div className="avatar-upload">
-                <img 
-                  src={avatarPreview} 
-                  alt="avatar" 
-                  className="preview-avatar"
-                />
+                <img src={avatarPreview} alt="avatar" className="preview-avatar" />
+                <label htmlFor="avatar-input" className="upload-label">
+                  更换头像
+                </label>
                 <input
+                  id="avatar-input"
                   type="file"
                   accept="image/*"
                   onChange={handleAvatarChange}
+                  style={{ display: 'none' }}
                 />
               </div>
               <div className="form-group">
@@ -98,8 +124,22 @@ const UserInfo = ({ user, onLogout }) => {
           </div>
         </div>
       )}
+
+      {/* 退出确认弹窗 */}
+      {showConfirm && (
+        <div className="modal-overlay">
+          <div className="confirm-modal">
+            <h3>确认退出</h3>
+            <p>确定要退出登录吗？</p>
+            <div className="modal-buttons">
+              <button onClick={confirmLogout}>确定</button>
+              <button onClick={() => setShowConfirm(false)}>取消</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-export default UserInfo; 
+export default Home;

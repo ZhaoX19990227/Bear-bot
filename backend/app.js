@@ -4,6 +4,12 @@ import 'dotenv/config';
 import authRoutes from './routes/auth.js';
 import chatRoutes from './routes/chat.js';
 import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// 获取 __dirname 的 ES 模块替代方案
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -31,6 +37,14 @@ app.use((err, req, res, next) => {
     message: '服务器内部错误' 
   });
 });
+
+const isDev = process.env.NODE_ENV === 'development';
+const uploadPath = isDev 
+  ? path.join(__dirname, 'public/uploads')  // 本地开发路径
+  : '/usr/bear-bot/backend/public/uploads'; // 服务器路径
+
+// 添加静态文件服务
+app.use('/uploads', express.static(uploadPath));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -1,0 +1,236 @@
+:root {
+  --bg-brown: #F2E6D8;
+  --header-bg: #D4BBA3;
+  --bear-brown: #967259;
+  --honey-color: #FFB75E;
+}
+
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-brown);
+  background-image: linear-gradient(
+    45deg, 
+    rgba(150, 114, 89, 0.03) 25%, 
+    transparent 25%, 
+    transparent 75%, 
+    rgba(150, 114, 89, 0.03) 75%, 
+    rgba(150, 114, 89, 0.03)
+  );
+  background-size: 60px 60px;
+}
+
+.header {
+  padding: 20px 40px;
+  background-color: var(--bear-brown);
+  box-shadow: 0 2px 8px rgba(150, 114, 89, 0.15);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--bear-brown);
+  transition: all 0.3s ease;
+  padding: 0;
+  display: block;
+  background-color: var(--bear-brown);
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(150, 114, 89, 0.3);
+  border-color: var(--honey-color);
+}
+
+.user-nickname {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--bear-brown);
+}
+
+.logout-button {
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: var(--dark-brown);
+}
+
+.home-container h1 {
+  color: var(--primary-color);
+  font-size: 3rem;
+  text-align: center;
+  margin: auto;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-container {
+  position: relative;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 120%;
+  right: -20px;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.3);
+  min-width: 120px;
+  z-index: 1000;
+  padding: 5px 0;
+}
+
+.dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  right: 28px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--white);
+}
+
+.dropdown-menu div {
+  padding: 10px 20px;
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.dropdown-menu div:hover {
+  background-color: var(--cream);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal, .confirm-modal {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 12px rgba(139, 115, 85, 0.2);
+}
+
+.modal h3, .confirm-modal h3 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.avatar-upload {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.preview-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 3px solid var(--primary-color);
+  padding: 0;
+  display: block;
+  background-color: var(--primary-color);
+}
+
+.upload-label {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--dark-brown);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--light-brown);
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.form-group input:disabled {
+  background-color: var(--cream);
+  cursor: not-allowed;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-buttons button:first-child {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.modal-buttons button:last-child {
+  background-color: var(--cream);
+  color: var(--dark-brown);
+}
+
+.confirm-modal {
+  text-align: center;
+}
+
+.confirm-modal p {
+  margin: 20px 0;
+  color: var(--dark-brown);
+}
