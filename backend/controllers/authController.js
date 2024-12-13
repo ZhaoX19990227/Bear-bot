@@ -3,8 +3,40 @@ import jwt from 'jsonwebtoken';
 import pool from '../config/database.js';
 import { emailUtils } from '../utils/email.js';
 import { verificationCodeUtils } from '../config/redis.js';
+import { minioClient } from '../config/minio.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'bear';
+
+export const uploadAvatar = async (req, res) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).json({ success: false, message: '文件上传失败' });
+    }
+
+    const bucketName = 'bear-bot';
+    const objectName = `${Date.now()}_${encodeURIComponent(file.originalname)}`;
+
+    // 检查 bucket 是否存在，不存在则创建
+    const bucketExists = await minioClient.bucketExists(bucketName);
+    if (!bucketExists) {
+      await minioClient.makeBucket(bucketName, 'us-east-1');
+    }
+
+    // 上传文件到 MinIO
+    await minioClient.putObject(bucketName, objectName, file.buffer, {
+      'Content-Type': file.mimetype,
+    });
+
+    const avatarUrl = `http://120.46.13.61:9000/${bucketName}/${objectName}`;
+    res.json({ success: true, url: avatarUrl });
+  } catch (error) {
+    console.error('头像上传失败:', error);
+    res.status(500).json({ success: false, message: '头像上传失败' });
+  }
+};
+
+
 
 // 发送验证码
 export const sendVerificationCode = async (req, res) => {
@@ -74,7 +106,7 @@ export const verifyCode = async (req, res) => {
 // 注册
 export const register = async (req, res) => {
   try {
-    const { email, password, nickname, code } = req.body;
+    const { email, password, nickname, code, avatar } = req.body;
     
     // 验证验证码
     const isCodeValid = await verificationCodeUtils.verifyCode(email, code);
@@ -101,7 +133,7 @@ export const register = async (req, res) => {
     // 插入用户数据
     await pool.query(
       'INSERT INTO users (email, password, nickname, ip_address, latitude, longitude, avatar) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [email, hashedPassword, nickname, ip, latitude, longitude, avatarUrl]
+      [email, hashedPassword, nickname, ip, latitude, longitude, avatar]
     );
 
     res.json({ success: true, message: '注册成功' });

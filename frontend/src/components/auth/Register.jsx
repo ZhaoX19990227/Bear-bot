@@ -17,17 +17,36 @@ const Register = () => {
   const [error, setError] = useState('');
   const [isCodeSent, setIsCodeSent] = useState(false);
 
-  const handleAvatarChange = (e) => {
+  const handleAvatarChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
         setError('头像文件不能超过5MB');
         return;
       }
-      setFormData({ ...formData, avatar: file });
-      setAvatarPreview(URL.createObjectURL(file));
+  
+      const formDataToSend = new FormData();
+      formDataToSend.append('file', file);
+  
+      try {
+        const response = await fetch('/api/auth/upload-avatar', {
+          method: 'POST',
+          body: formDataToSend,
+        });
+        const data = await response.json();
+        if (data.success) {
+          setAvatarPreview(data.url);
+          setFormData({ ...formData, avatar: data.url }); // 保存头像 URL
+          setError('');
+        } else {
+          setError(data.message);
+        }
+      } catch (error) {
+        setError('上传头像失败，请稍后重试');
+      }
     }
   };
+  
 
   const handleChange = (e) => {
     setFormData({
