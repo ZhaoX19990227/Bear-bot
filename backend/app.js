@@ -7,6 +7,8 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import mysql from 'mysql2';
+
 // 获取 __dirname 的 ES 模块替代方案
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,7 +48,31 @@ const uploadPath = isDev
 // 添加静态文件服务
 app.use('/uploads', express.static(uploadPath));
 
-const PORT = process.env.PORT || 3000;
+
+
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST, // 确保使用环境变量
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
+});
+
+connection.connect((err) => {
+  if (err) {
+    console.error('数据库连接失败:', err);
+    return;
+  }
+  // 打印数据库连接信息
+  console.log('数据库连接信息:', {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+  });
+  console.log('数据库连接成功');
+});
+
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`服务器运行在端口 ${PORT}`);
 }); 
