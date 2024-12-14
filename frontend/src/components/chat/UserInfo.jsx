@@ -145,19 +145,19 @@ const UserInfo = ({ user }) => {
           <div className="support-images">
             <div className="support-item">
               <img
-                src="/images/friend.jpg"
+                src="http://120.46.13.61:9000/bear-bot/1734170497410_IMG_4664.JPG"
                 alt="Friend"
                 style={{ width: "100px", margin: "10px" }}
               />
-              <p>加我好友</p>
+              <p>加我好友🧑‍🤝‍🧑</p>
             </div>
             <div className="support-item">
               <img
-                src="/images/pay.jpg"
-                alt="Pay"
+                src="http://120.46.13.61:9000/bear-bot/1734170521949_IMG_4665.JPG"
+                alt="Conffee"
                 style={{ width: "100px", margin: "10px" }}
               />
-              <p>请我喝咖啡</p>
+              <p>请我喝咖啡☕️</p>
             </div>
           </div>
         </div>

@@ -4,6 +4,8 @@ import pool from '../config/database.js';
 import { emailUtils } from '../utils/email.js';
 import { verificationCodeUtils } from '../config/redis.js';
 import { minioClient } from '../config/minio.js';
+import { config } from '../config/map.js'; // 导入配置
+import axios from 'axios';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'bear';
 
@@ -105,11 +107,22 @@ export const verifyCode = async (req, res) => {
   }
 };
 
+// 获取城市信息
+export const getCityInfo = async (ip) => {
+  const response = await axios.get(`https://restapi.amap.com/v3/ip?key=${config.amapKey}&ip=${ip}`);
+  return response.data;
+};
+
 // 注册
 export const register = async (req, res) => {
   try {
-    const { email, password, nickname, code, avatar } = req.body;
-    
+    const { email, password, nickname, code } = req.body;
+    const ip = req.ip; // 获取用户 IP
+
+    // 获取城市信息
+    const cityInfo = await getCityInfo(ip);
+    const city = cityInfo.city; // 获取城市名称
+
     // 验证验证码
     const isCodeValid = await verificationCodeUtils.verifyCode(email, code);
     if (!isCodeValid) {
@@ -124,17 +137,10 @@ export const register = async (req, res) => {
 
     // 加密密码
     const hashedPassword = await bcrypt.hash(password, 10);
-    
-    // 获取IP地址和地理位置
-    const ip = req.ip;
-    const latitude = req.body.latitude || null;
-    const longitude = req.body.longitude || null;
-
-
     // 插入用户数据
     await pool.query(
-      'INSERT INTO users (email, password, nickname, ip_address, latitude, longitude, avatar) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [email, hashedPassword, nickname, ip, latitude, longitude, avatar]
+      'INSERT INTO users (email, password, nickname, ip_address, city) VALUES (?, ?, ?, ?, ?)',
+      [email, hashedPassword, nickname, ip, city]
     );
 
     res.json({ success: true, message: '注册成功' });
@@ -148,6 +154,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const ip = req.ip; // 获取用户 IP
 
     // 查找用户
     const [users] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
@@ -156,12 +163,18 @@ export const login = async (req, res) => {
     }
 
     const user = users[0];
+    user.ip = ip;
+
     
     // 验证密码
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ success: false, message: '密码错误' });
     }
+
+    // 获取城市信息
+    const cityInfo = await getCityInfo(user.ip_address);
+    const city = cityInfo.city; // 获取城市名称
 
     // 生成JWT令牌
     const token = jwt.sign(
@@ -178,7 +191,9 @@ export const login = async (req, res) => {
         id: user.id,
         email: user.email,
         nickname: user.nickname,
-        avatar: user.avatar
+        avatar: user.avatar,
+        city: user.city,
+        ip: user.ip
       }
     });
   } catch (error) {

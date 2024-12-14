@@ -31,6 +31,12 @@ const upload = multer({
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 
+// 获取用户 IP 地址
+app.get('/get-ip', (req, res) => {
+  let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  res.send({ ip });
+});
+
 // 错误处理
 app.use((err, req, res, next) => {
   console.error(err.stack);
