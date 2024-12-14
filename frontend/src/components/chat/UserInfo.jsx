@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./UserInfo.css";
-import { api } from "../../utils/api";
 
 const UserInfo = ({ user }) => {
   const [activeTab, setActiveTab] = useState("info"); // 默认选中个人信息

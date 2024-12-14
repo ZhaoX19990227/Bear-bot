@@ -234,3 +234,27 @@
   margin: 20px 0;
   color: var(--dark-brown);
 }
+.user-weather {
+  display: flex;
+  flex-direction: column; /* 垂直排列天气和温度 */
+  gap: 5px; /* 添加间隔 */
+  margin-right: auto;
+}
+
+.weather-text {
+  color: #FFB75E; /* 设置特色字体颜色 */
+  font-weight: bold; /* 加粗字体 */
+  font-size: 1.2rem;
+}
+
+.city-text {
+  color: #FFB75E; /* 设置特色字体颜色 */
+  font-weight: bold; /* 加粗字体 */
+  font-size: 1.2rem;
+}
+
+.temperature-text {
+  color: #FFB75E; /* 设置特色字体颜色 */
+  font-weight: bold; /* 加粗字体 */
+  font-size: 1.2rem;
+}
