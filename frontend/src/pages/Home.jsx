@@ -98,9 +98,9 @@ const Home = () => {
       <div className="header">
         <div className="user-info">
           <div className="user-weather">
-            <span className="city-text">城市: {city}</span>
-            <span className="weather-text">天气: {weather}</span>
-            <span className="temperature-text">温度: {temperature}°C</span>
+            {city && <span className="city-text">城市: {city}</span>}
+            {weather && <span className="weather-text">天气: {weather}</span>}
+            {temperature && <span className="temperature-text">温度: {temperature}°C</span>}
           </div>
           <span className="user-nickname">{userInfo.nickname}</span>
           <div className="avatar-container" onClick={() => setShowModal(true)}>

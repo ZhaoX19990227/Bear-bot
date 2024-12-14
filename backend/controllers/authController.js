@@ -114,13 +114,17 @@ export const getCityInfo = async (ip) => {
 // 注册
 export const register = async (req, res) => {
   try {
-    const { email, password, nickname, code } = req.body;
+    const { email, password, nickname, code, avatar } = req.body;
     const ip = req.ip; // 获取用户 IP
 
-    // 获取城市信息
-    const cityInfo = await getCityInfo(ip);
-    const city = cityInfo.city; // 获取城市名称
+    let city = "0";
+    if (ip !== "::1") {
+      // 获取城市信息
+      const cityInfo = await getCityInfo(ip);
+      city = cityInfo.adcode;
+    }
 
+    console.log("city:", city);
     // 验证验证码
     const isCodeValid = await verificationCodeUtils.verifyCode(email, code);
     if (!isCodeValid) {
@@ -144,8 +148,8 @@ export const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     // 插入用户数据
     await pool.query(
-      "INSERT INTO users (email, password, nickname, ip_address, city) VALUES (?, ?, ?, ?, ?)",
-      [email, hashedPassword, nickname, ip, city]
+      "INSERT INTO users (email, password, nickname, ip_address, city, avatar) VALUES (?, ?, ?, ?, ?, ?)",
+      [email, hashedPassword, nickname, ip, city, avatar]
     );
 
     res.json({ success: true, message: "注册成功" });
@@ -180,15 +184,23 @@ export const login = async (req, res) => {
       return res.status(401).json({ success: false, message: "密码错误" });
     }
 
-    // 获取城市信息
-    const cityInfo = await getCityInfo(user.ip_address);
-    const adcode = cityInfo.adcode; // 获取城市编码
-    // 存入redis
-    await verificationCodeUtils.saveUserCityInfo(user.id, adcode);
-    user.city = adcode;
-    if (typeof window !== "undefined") {
-      localStorage.setItem("user", JSON.stringify(user));
+    let adcode = "";
+    if (user.ip_address && user.ip_address !== "" && "::1" != user.ip_address) {
+      // 获取城市信息
+      const cityInfo = await getCityInfo(user.ip_address);
+      if (cityInfo && cityInfo.adcode) {
+        adcode = cityInfo.adcode; // 获取城市编码
+        if (adcode && adcode !== "" && adcode !== "0") {
+          // 存入redis
+          await verificationCodeUtils.saveUserCityInfo(user.id, adcode);
+          user.city = adcode;
+        }
+        if (typeof window !== "undefined") {
+          localStorage.setItem("user", JSON.stringify(user));
+        }
+      }
     }
+
     // 生成JWT令牌
     const token = jwt.sign({ userId: user.id, email: user.email }, JWT_SECRET, {
       expiresIn: "24h",
