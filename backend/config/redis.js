@@ -21,6 +21,7 @@ export const verificationCodeUtils = {
   // 获取验证码
   async getVerificationCode(email) {
     const key = VERIFICATION_CODE_PREFIX + email;
+    console.log("key:", key);
     return await redis.get(key);
   },
 
@@ -33,6 +34,7 @@ export const verificationCodeUtils = {
   // 验证验证码
   async verifyCode(email, code) {
     const savedCode = await this.getVerificationCode(email);
+    console.log("savedCode:", savedCode);
     return savedCode === code;
   }
 };

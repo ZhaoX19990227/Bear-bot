@@ -79,6 +79,8 @@ export const verifyCode = async (req, res) => {
     
     // 验证验证码
     const isValid = await verificationCodeUtils.verifyCode(email, code);
+    console.log("isValid:", isValid);
+
     
     if (isValid) {
       // 验证成功后删除验证码
@@ -128,7 +130,6 @@ export const register = async (req, res) => {
     const latitude = req.body.latitude || null;
     const longitude = req.body.longitude || null;
 
-    const avatarUrl = `${process.env.UPLOAD_URL}/avatars/${req.file.filename}`;
 
     // 插入用户数据
     await pool.query(

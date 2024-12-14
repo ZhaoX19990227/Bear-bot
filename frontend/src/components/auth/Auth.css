@@ -108,7 +108,7 @@
 }
 
 .verification-code::before {
-  content: '🔑';
+  content: '';
 }
 
 .send-code-button {
