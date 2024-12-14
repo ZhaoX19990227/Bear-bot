@@ -240,3 +240,17 @@ export const getUserInfo = async (req, res) => {
     res.status(500).json({ success: false, message: '获取用户信息失败' });
   }
 }; 
+
+// 更新用户信息
+export const updateUserInfo = async (req, res) => {
+  console.log("updateUserInfo:", req.body);
+  const { nickname, avatar } = req.body;
+  const userId = req.user.userId;
+
+  await pool.query(
+    'UPDATE users SET nickname = ?, avatar = ? WHERE id = ?',
+    [nickname, avatar, userId]
+  );
+
+  res.json({ success: true, message: '用户信息更新成功' });
+};

@@ -7,7 +7,8 @@ import {
   verifyCode,
   resetPassword,
   getUserInfo,
-  uploadAvatar
+  uploadAvatar,
+  updateUserInfo
 } from '../controllers/authController.js';
 import multer from 'multer';
 
@@ -23,5 +24,5 @@ router.post('/reset-password', resetPassword);
 // 需要认证的路由
 router.get('/user-info', authenticateToken, getUserInfo);
 router.post('/upload-avatar', upload.single('file'), uploadAvatar);
-
+router.post('/user/update', authenticateToken, updateUserInfo);
 export default router; 

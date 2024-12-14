@@ -30,11 +30,11 @@
 
 .auth-box {
   background: var(--white);
-  padding: 2.5rem;
+  padding: 2rem;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(139, 115, 85, 0.1);
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
   position: relative;
   z-index: 1;
 }
@@ -42,30 +42,30 @@
 .auth-box::before {
   content: '🐻';
   position: absolute;
-  top: -30px;
+  top: -20px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .auth-box h2 {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   color: var(--dark-brown);
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
 .form-group {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   position: relative;
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.8rem 1rem 0.8rem 2.5rem;
+  padding: 0.6rem 1rem 0.6rem 2.5rem;
   border: 2px solid var(--light-brown);
   border-radius: 20px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
   background-color: var(--white);
 }
@@ -82,7 +82,7 @@
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .form-group.email::before {
@@ -112,7 +112,7 @@
 }
 
 .send-code-button {
-  padding: 0.8rem 1.2rem;
+  padding: 0.6rem 1rem;
   background-color: var(--primary-color);
   color: var(--white);
   border: none;
@@ -120,7 +120,7 @@
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.3s ease;
-  min-width: 100px;
+  min-width: 80px;
 }
 
 .send-code-button:hover {
@@ -134,14 +134,14 @@
 
 .auth-button {
   width: 100%;
-  padding: 1rem;
+  padding: 0.8rem;
   background-color: var(--primary-color);
   color: var(--white);
   border: none;
   border-radius: 20px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   cursor: pointer;
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -157,7 +157,7 @@
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.2rem;
+  font-size: 1rem;
   opacity: 0;
   transition: all 0.3s ease;
 }
@@ -167,7 +167,7 @@
 }
 
 .auth-links {
-  margin-top: 1.5rem;
+  margin-top: 1.2rem;
   text-align: center;
   display: flex;
   justify-content: space-between;
@@ -190,7 +190,7 @@
   right: -20px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 12px;
+  font-size: 10px;
   opacity: 0;
   transition: all 0.3s ease;
 }
@@ -203,9 +203,9 @@
 .error-message {
   background-color: #ffebee;
   color: #c62828;
-  padding: 1rem;
+  padding: 0.8rem;
   border-radius: 20px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   text-align: center;
   position: relative;
 }
@@ -244,18 +244,18 @@
 
 .avatar-upload {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
 .avatar-wrapper {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   margin: 0 auto;
   border-radius: 50%;
   overflow: hidden;
   cursor: pointer;
-  border: 3px solid var(--primary-color);
+  border: 2px solid var(--primary-color);
   transition: all 0.3s ease;
   background-color: var(--cream);
 }
@@ -286,9 +286,9 @@
 
 .upload-label {
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.2);
 }
@@ -303,7 +303,7 @@
   position: absolute;
   bottom: -5px;
   right: -5px;
-  font-size: 20px;
+  font-size: 16px;
   transform: rotate(45deg);
 }
 
@@ -322,13 +322,28 @@
 
 /* 可以移除内联样式，改用 CSS 类 */
 .avatar-placeholder {
-  font-size: 15px;
+  font-size: 12px;
   text-align: center;
-  padding: 10px;
+  padding: 8px;
 }
 
 /* 调整熊图标和文字的布局 */
 .avatar-placeholder span {
   display: block;
   margin-bottom: 5px;
+}
+
+/* 媒体查询 */
+@media (max-width: 768px) {
+  .auth-box {
+    padding: 1.5rem;
+    max-width: 300px;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 100px;
+  }
+
+  .auth-box h2 {
+    font-size: 1.4rem;
+  }
 }
