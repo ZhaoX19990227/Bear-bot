@@ -10,25 +10,25 @@ const UserInfo = ({ user }) => {
 
   const [error, setError] = useState("");
 
-  const handleAvatarChange = (e) => {
+  const handleAvatarChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 5 * 1024 * 1024) {
         alert("头像文件不能超过5MB");
         return;
       }
-      try {
-        const formData = new FormData();
-        formData.append("file", file);
+      const formData = new FormData();
+      formData.append("file", file);
 
-        const response = fetch("/api/auth/upload-avatar", {
+      try {
+        const response = await fetch("/api/auth/upload-avatar", {
           method: "POST",
           body: formData,
         });
-        const data = response.json();
+        const data = await response.json();
         if (data.success) {
-          setAvatarPreview(data.url);
-          setUserInfo({ ...userInfo, avatar: data.url }); // 保存头像 URL
+          setAvatarPreview(data.url); // 更新头像预览
+          setUserInfo({ ...userInfo, avatar: data.url }); // 更新用户信息中的头像 URL
           setError("");
         } else {
           setError(data.message);
